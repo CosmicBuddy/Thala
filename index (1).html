@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thala - The Legend of Cricket</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0a0a0a;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+
+    header h1 {
+      color: #00ffb3;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffb3;
+    }
+
+    #home {
+      height: 100vh;
+      background: url('https://wallpapers.com/images/hd/mahendra-singh-dhoni-8k-legend-captain-cool-d3bqq4s09l2r2h7d.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    #home .content {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 20px;
+      animation: fadeIn 2s ease;
+    }
+
+    #home h2 {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      color: #00ffb3;
+    }
+
+    #home p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    #about, #stats, #gallery, #quotes, #timeline {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    #about {
+      background: #101010;
+    }
+
+    #about h2, #stats h2, #gallery h2, #quotes h2, #timeline h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #00ffb3;
+    }
+
+    #about p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    #stats {
+      background: linear-gradient(120deg, #001f3f, #003566, #001f3f);
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      transition: 0.4s;
+    }
+
+    .stat-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffb3;
+    }
+
+    .stat-box h3 {
+      font-size: 2em;
+      color: #00ffb3;
+    }
+
+    .stat-box p {
+      color: #ccc;
+      margin-top: 10px;
+    }
+
+    #gallery {
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    }
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 40px;
+    }
+
+    .gallery-container img {
+      width: 100%;
+      border-radius: 15px;
+      transition: 0.4s;
+      cursor: pointer;
+    }
+
+    .gallery-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffb3;
+    }
+
+    #timeline {
+      background: #111;
+    }
+
+    .timeline-container {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .timeline-line {
+      position: absolute;
+      width: 4px;
+      background: #00ffb3;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      width: 45%;
+      position: relative;
+      margin: 20px 0;
+      transition: 0.4s;
+    }
+
+    .timeline-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #00ffb3;
+    }
+
+    .timeline-item.left { left: 0; }
+    .timeline-item.right { left: 55%; }
+
+    .timeline-item h3 { color: #00ffb3; }
+    .timeline-item p { color: #ccc; }
+
+    #quotes {
+      background: #0a0a0a;
+    }
+
+    .quote {
+      max-width: 700px;
+      margin: 20px auto;
+      font-style: italic;
+      font-size: 1.2em;
+      color: #ccc;
+    }
+
+    footer {
+      background: #000;
+      padding: 30px;
+      text-align: center;
+      color: #888;
+    }
+
+    /* Music button */
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00ffb3;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Thala</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#stats">Stats</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#quotes">Quotes</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="content">
+      <h2>Mahendra Singh Dhoni 🏏</h2>
+      <p>The Captain. The Finisher. The Legend.<br>From Ranchi to the World – Calmness in Chaos.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Thala</h2>
+    <p>
+      Mahendra Singh Dhoni, affectionately known as "Thala," is one of cricket's greatest icons. 
+      Known for his calm demeanor and sharp cricketing mind, Dhoni led India to numerous victories 
+      — including the 2007 T20 World Cup, the 2011 Cricket World Cup, and the 2013 Champions Trophy.
+    </p>
+  </section>
+
+  <section id="stats">
+    <h2>Career Stats</h2>
+    <div class="stats-container">
+      <div class="stat-box"><h3>538</h3><p>International Matches</p></div>
+      <div class="stat-box"><h3>17,266</h3><p>Runs Scored</p></div>
+      <div class="stat-box"><h3>829</h3><p>Dismissals as Wicketkeeper</p></div>
+      <div class="stat-box"><h3>3</h3><p>ICC Trophies Won</p></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <h2>Career Timeline</h2>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div class="timeline-item left">
+        <h3>2004</h3><p>Dhoni makes his India debut against Bangladesh.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>2007</h3><p>Leads India to T20 World Cup victory — a new era begins.</p>
+      </div>
+      <div class="timeline-item left">
+        <h3>2011</h3><p>Finishes the World Cup with a six! India lifts the trophy.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>2013</h3><p>Becomes the first captain to win all ICC trophies.</p>
+      </div>
+      <div class="timeline-item left">
+        <h3>2020</h3><p>Announces international retirement — end of an era.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>2023</h3><p>Leads CSK to their 5th IPL title. Thala forever 💛.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Career Highlights</h2>
+    <div class="gallery-container">
+      <img src="https://wallpapers.com/images/high/ms-dhoni-with-t20-world-cup-trophy-vvhxdt44aztq24z3.webp" alt="">
+      <img src="https://wallpapers.com/images/high/ms-dhoni-lifting-world-cup-2011-zhzujcrrj6seep7x.webp" alt="">
+      <img src="https://wallpapers.com/images/high/ms-dhoni-csk-captain-9m6g9zlxgq8s4w4g.webp" alt="">
+      <img src="https://wallpapers.com/images/high/ms-dhoni-stumping-action-4k-tb64dc46f6hdjehw.webp" alt="">
+    </div>
+  </section>
+
+  <section id="quotes">
+    <h2>Iconic Quotes</h2>
+    <div class="quote">"I never allow myself to be pressured by expectations — I play for my country, not for critics."</div>
+    <div class="quote">"You don’t play for the crowd; you play for the country."</div>
+    <div class="quote">"Face your fears. Live your dreams. That’s how you become a legend."</div>
+  </section>
+
+  <footer>
+    <p>© 2025 Thala | Dedicated to Mahendra Singh Dhoni 💛 | Made with ❤️ by Himanshu</p>
+  </footer>
+
+  <!-- 🎵 Background Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/01/audio_cac6ecb186.mp3?filename=indian-epic-11143.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="music-btn">Play Music 🎵</button>
+
+  <script>
+    const audio = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
+
+    // Try to autoplay
+    audio.play().catch(() => {
+      musicBtn.style.display = 'block';
+    });
+
+    musicBtn.addEventListener('click', () => {
+      audio.play();
+      musicBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
